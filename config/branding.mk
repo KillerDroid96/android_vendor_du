@@ -5,14 +5,14 @@ ifndef DU_BUILD_TYPE
     DU_BUILD_TYPE := UNOFFICIAL
 endif
 
-# Only include DU-Updater for official, weeklies, and rc builds
-ifeq ($(filter-out OFFICIAL WEEKLIES RC,$(DU_BUILD_TYPE)),)
+# Only include DU-Updater for unofficial, official, weeklies, and rc builds
+ifeq ($(filter-out UNOFFICIAL OFFICIAL WEEKLIES RC,$(DU_BUILD_TYPE)),)
     PRODUCT_PACKAGES += \
         DU-Updater
 endif
 
-# Sign builds if building an official or weekly build
-ifeq ($(filter-out OFFICIAL WEEKLIES,$(DU_BUILD_TYPE)),)
+# Sign builds if building an unofficial, official or weekly build
+ifeq ($(filter-out UNOFFICIAL OFFICIAL WEEKLIES,$(DU_BUILD_TYPE)),)
     PRODUCT_DEFAULT_DEV_CERTIFICATE := ../.keys/releasekey
 endif
 
